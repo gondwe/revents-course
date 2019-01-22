@@ -8,7 +8,7 @@ const events = [
   {
     id: '1',
     title: 'Trip to Tower of London',
-    date: '2018-03-27T11:00:00+00:00',
+    date: '2018-03-27',
     category: 'culture',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.',
@@ -32,7 +32,7 @@ const events = [
   {
     id: '2',
     title: 'Trip to Punch and Judy Pub',
-    date: '2018-03-28T14:00:00+00:00',
+    date: '2018-03-28',
     category: 'drinks',
     description:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sollicitudin ligula eu leo tincidunt, quis scelerisque magna dapibus. Sed eget ipsum vel arcu vehicula ullamcorper.',
@@ -60,6 +60,7 @@ class EventDashboard extends Component {
 
     state = {
       events:events,
+      selectedEvent:null,
       isOpen:false
     }
 
@@ -71,6 +72,14 @@ class EventDashboard extends Component {
 
     openForm = ()=>{
       this.setState({
+        selectedEvent:null,
+        isOpen:true
+      })
+    }
+
+    handleEventEdit = (eventToUpdate) => () => {
+      this.setState({
+        selectedEvent:eventToUpdate,
         isOpen:true
       })
     }
@@ -85,18 +94,41 @@ class EventDashboard extends Component {
       })
     }
 
+    eventUpdate = (updatedEvent)=>{
+      this.setState({
+        isOpen:false,
+        selectedEvent:null,
+        events:this.state.events.map(event=>{
+          if(event.id === updatedEvent.id){
+            return Object.assign({},updatedEvent)
+          }else{
+            return event;
+          }
+        })
+      })
+    }
+
+
+    eventDelete = (EventID) => () => {
+      this.setState({
+        events : this.state.events.filter(e=>e.id !== EventID)
+      })
+    }
+
   render() {
+    
+    const {selectedEvent} = this.state
     return (
       <div>
         <Grid>
             <GridColumn width={10}>
-              <EventListing events={this.state.events}/>
+              <EventListing deleteEvent={this.eventDelete} eventEdit={this.handleEventEdit} events={this.state.events}/>
             </GridColumn>
             <GridColumn width={6}>
             <Button onClick={this.openForm} content="Create Event" positive ></Button>
               {
                 this.state.isOpen &&
-                <EventForm addEvent={this.eventCreate} cancelForm={this.cancelForm}/>
+                <EventForm updateEvent={this.eventUpdate} selectedEvent={selectedEvent} addEvent={this.eventCreate} cancelForm={this.cancelForm}/>
               }
             </GridColumn>
         </Grid>
