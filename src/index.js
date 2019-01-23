@@ -1,17 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from 'react-redux'
 import 'semantic-ui-css/semantic.min.css';
 import './index.css';
 import App from './app/layout/App';
 import * as serviceWorker from './serviceWorker';
+import storeConfig from './app/store/storeConfig';
+
+const store = storeConfig();
+const rootElement = document.getElementById('root');
 
 ReactDOM.render(
-<BrowserRouter>
-    <App />
-</BrowserRouter>,
-
-document.getElementById('root')
+    <Provider store={store}>
+        <BrowserRouter>
+            <App />
+        </BrowserRouter>
+    </Provider>,
+    rootElement
 
 );
 

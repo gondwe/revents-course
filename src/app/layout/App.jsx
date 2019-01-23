@@ -9,6 +9,7 @@ import UserDashboard from '../features/user/UserDashboard';
 import UserDetails from '../features/user/UserDetails';
 import HomePage from '../features/home/HomePage';
 import SettingsDashboard from '../features/user/settings/SettingsDashboard';
+import TestComponent from '../features/tests/TestComponent';
 
 
 class App extends Component {
@@ -24,6 +25,7 @@ class App extends Component {
             <NavBar />
             <Container className="main">
               <Switch>
+                <Route path="/tests" component={TestComponent} />
                 <Route path="/events" component={EventDashboard} />
                 <Route path="/event/:id" component={EventDetail} />
                 <Route path="/users" component={UserDashboard} />
