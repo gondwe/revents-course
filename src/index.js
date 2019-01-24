@@ -7,6 +7,7 @@ import './index.css';
 import App from './app/layout/App';
 import * as serviceWorker from './serviceWorker';
 import storeConfig from './app/store/storeConfig';
+import Scrollup from './app/common/util/scrollup';
 
 const store = storeConfig();
 const rootElement = document.getElementById('root');
@@ -14,7 +15,9 @@ const rootElement = document.getElementById('root');
 ReactDOM.render(
     <Provider store={store}>
         <BrowserRouter>
+        <Scrollup>
             <App />
+        </Scrollup>
         </BrowserRouter>
     </Provider>,
     rootElement
