@@ -29,7 +29,7 @@ const EventDetailSidebar = ({ attendees }) => {
               <Image size="tiny" src="/assets/user.png" />
               <ItemContent verticalAlign="middle">
                 <ItemHeader as="h3">
-                  <a>{attendee.name}</a>
+                  <a href={"/"}>{attendee.name}</a>
                 </ItemHeader>
               </ItemContent>
             </Item>

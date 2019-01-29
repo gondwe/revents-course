@@ -1,8 +1,8 @@
 import React from 'react'
-import { FormField, Label } from 'semantic-ui-react';
-import DatePicker from 'react-datepicker'
+import { Label, FormField } from 'semantic-ui-react';
 import 'react-datepicker/dist/react-datepicker.css'
-import moment from 'moment'
+import DatePicker from 'react-datepicker'
+// import moment from 'moment'
 
 
 const DateInput = ({
@@ -14,8 +14,9 @@ const DateInput = ({
                 {...rest}
                 // {...input}
                 placeholderText={placeholder}
-                selected={input.value ? moment(input.value,'yyyy-mm-dd HH:mm') : null}
+                selected={input.value ? input.value : null}
                 onChange={input.onChange}
+                
             />
             {touched && error && <Label basic color='red'>{error}</Label>}
         </FormField>
